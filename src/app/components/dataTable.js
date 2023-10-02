@@ -20,7 +20,7 @@ export default function DataTable() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/members/allMembers").then((res) => {
+    axios.get("https://yazilim-server.azurewebsites.net/api/members/allMembers").then((res) => {
       console.log(res.data);
       setRows(res.data);
     }).catch((err) => alert(err.message));
