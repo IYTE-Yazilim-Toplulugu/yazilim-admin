@@ -1,17 +1,34 @@
-import * as React from "react";
+import React, { useEffect, useState} from "react";
 import { DataGrid } from "@mui/x-data-grid";
+import axios from "axios";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
-  { field: "fullName", headerName: "Full name", width: 160 },
-  { field: "studentNumber", headerName: "Student Number", width: 160 },
+  { field: "name", headerName: "Full name", width: 160 },
+  { field: "school_number", headerName: "Student Number", width: 160 },
   { field: "email", headerName: "Email", width: 160 },
   { field: "department", headerName: "Department", width: 160 },
+  { field: "school", headerName: "School", width: 160 },
+  { field: "board", headerName: "Board", width: 160 },
+  { field: "role", headerName: "Role", width: 160 },
+  { field: "phone", headerName: "Phone", width: 160 },
 ];
 
-const rows = [];
+
 
 export default function DataTable() {
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/members/allMembers").then((res) => {
+      console.log(res.data);
+      setRows(res.data);
+    }).catch((err) => alert(err.message));
+
+    console.log(rows);
+  }, [])
+
+
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
