@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 
@@ -14,32 +14,32 @@ const columns = [
   { field: "phone", headerName: "Phone", width: 160 },
 ];
 
-
-
 export default function DataTable() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    axios.get("https://yazilim-server.azurewebsites.net/api/members/allMembers").then((res) => {
-      console.log(res.data);
-      setRows(res.data);
-    }).catch((err) => alert(err.message));
+    axios
+      .get("https://yazilim-server.azurewebsites.net/api/members/allMembers")
+      .then((res) => {
+        console.log(res.data);
+        setRows(res.data);
+      })
+      .catch((err) => alert(err.message));
 
     console.log(rows);
-  }, [])
-
+  }, []);
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ height: 630, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
         initialState={{
           pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
+            paginationModel: { page: 0, pageSize: 10 },
           },
         }}
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[10, 20, 50, 100]}
         checkboxSelection
       />
     </div>
